@@ -28,7 +28,7 @@ class TaskerServer
     public static function start(): void
     {
 
-        $file = Variables::getCachePath("servers", DS, "tasker_server");
+        $file = Variables::getCachePath("servers", DS, "tasker_server_" . md5("tasker_server"));
         if (!file_exists($file) || filemtime($file) + 30 < time()) {//没有锁定，请求保持锁定
             App::$debug && Log::record("Tasker", "定时任务进程未锁定，下发任务");
             //该项只需执行一次，20秒内不重复
